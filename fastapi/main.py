@@ -1,13 +1,16 @@
-from typing import List
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI
 
-app = FastAPI()
-@app.post("/files/")
-async def create_file(file: bytes = 
-File(...)):
-    return {"file_size": len(file)}
-@app.post("/uploadfiles/")
-async def create_upload_files(files: 
-List[UploadFile] = File(...)):
-    return {"filenames": [file.filename 
-for file in files]}
+app = FastAPI(title='hello world')
+
+@app.get('/')
+async def root():
+    return {'status': 'api running'}
+
+@app.get('/about')
+async def about():
+    return {'status': 'about page'}
+
+
+@app.get('/blogs/{id}')
+async def blog(id:int):
+    return {'blog':id}
